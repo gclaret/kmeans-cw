@@ -11,8 +11,18 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    point.cpp \
+    PointList.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    Point.h \
+    PointList.h
 
 FORMS    += mainwindow.ui
+
+
+
+
+
+
