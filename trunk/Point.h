@@ -5,17 +5,17 @@ class Point
 {
 public:
     Point();
-    Point(int x, int y);
+    Point(double x, double y);
 
-    int getX();
-    int getY();
-    void setX(int x);
-    void setY(int y);
+    double getX();
+    double getY();
+    void setX(double x);
+    void setY(double y);
 
     bool operator==(const Point &p) const;
 private:
-    int x;
-    int y;
+    double x;
+    double y;
 };
 
 #endif // POINT_H

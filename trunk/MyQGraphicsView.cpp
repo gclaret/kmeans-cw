@@ -15,7 +15,16 @@ MyQGraphicsView::MyQGraphicsView(QWidget *parent) : QGraphicsView(parent)
   */
 void MyQGraphicsView::mousePressEvent(QMouseEvent *e)
 {
+    PointList *pl = PointList::getInstance();
     double rad = 2;
+
     QPointF pt = mapToScene(e->pos());
     scene->addEllipse(pt.x() - rad, pt.y() - rad, rad * 2, rad * 2, QPen(), QBrush(Qt::SolidPattern));
+
+    pl->addPoint(new Point(pt.x(), pt.y()));
+}
+
+void MyQGraphicsView::drawPoint(Point *p)
+{
+    scene->addEllipse(p->getX(), p->getY(), 4, 4, QPen(), QBrush(Qt::SolidPattern));
 }

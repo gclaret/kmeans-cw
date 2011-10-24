@@ -5,12 +5,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 #include <QMouseEvent>
+#include "PointList.h"
 
 class MyQGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     explicit MyQGraphicsView(QWidget *parent = 0);
+    void drawPoint(Point *p);
 
 signals:
 

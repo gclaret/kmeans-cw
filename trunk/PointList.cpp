@@ -12,6 +12,23 @@ PointList::PointList()
 }
 */
 
+bool PointList::instance_created = false;
+PointList *PointList::instance = NULL;
+
+PointList *PointList::getInstance()
+{
+    if (!instance_created)
+    {
+        instance = new PointList();
+        instance_created = true;
+        return instance;
+    }
+    else
+    {
+        return instance;
+    }
+}
+
 void PointList::addPoint(Point *p)
 {
     pl->push_back(p);
