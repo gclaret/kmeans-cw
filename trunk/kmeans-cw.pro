@@ -13,13 +13,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     point.cpp \
-    PointList.cpp
+    PointList.cpp \
+    MyQGraphicsView.cpp
 
 HEADERS  += mainwindow.h \
     Point.h \
-    PointList.h
+    PointList.h \
+    MyQGraphicsView.h
 
 FORMS    += mainwindow.ui
+
+
 
 
 
