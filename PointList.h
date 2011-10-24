@@ -4,17 +4,26 @@
 #include <vector>
 #include "Point.h"
 
+
+// Making this a singleton object.
+// Only one pointlist should exist at any one point in time.
 using namespace std;
 class PointList
 {
 public:
-    PointList();
-    PointList(Point *p);
+
+    static PointList *getInstance();
     void addPoint(Point *p);
-    void removePoint(Point *p);
+
 
 private:
     vector< Point* > *pl;
+    PointList();
+
+    void removePoint(Point *p);
+
+    static PointList *instance;
+    static bool instance_created;
 };
 
 #endif // POINTLIST_H

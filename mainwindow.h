@@ -5,6 +5,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
+#include "PointList.h"
+#include "MyQGraphicsView.h"
 
 namespace Ui {
     class MainWindow;
@@ -23,6 +25,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    MyQGraphicsView *my_view;
 };
 
 #endif // MAINWINDOW_H
