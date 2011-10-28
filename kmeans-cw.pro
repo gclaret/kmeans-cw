@@ -14,14 +14,22 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     point.cpp \
     PointList.cpp \
-    MyQGraphicsView.cpp
+    MyQGraphicsView.cpp \
+    KMeansClustering.cpp \
+    Cluster.cpp
 
 HEADERS  += mainwindow.h \
     Point.h \
     PointList.h \
-    MyQGraphicsView.h
+    MyQGraphicsView.h \
+    KMeansClustering.h \
+    Cluster.h
 
 FORMS    += mainwindow.ui
+
+
+
+
 
 
 

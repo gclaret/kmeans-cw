@@ -43,7 +43,8 @@ void MainWindow::numberOfPointsHandler()
 
         Point *p = new Point(x_coord, y_coord);
         pl->addPoint(p);
-        my_view->drawPoint(p);
+        my_view->drawPoint(p, QColor("cyan"));
+
 
     }
 

@@ -6,13 +6,15 @@
 #include <QGraphicsEllipseItem>
 #include <QMouseEvent>
 #include "PointList.h"
+#include "Cluster.h"
 
 class MyQGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
     explicit MyQGraphicsView(QWidget *parent = 0);
-    void drawPoint(Point *p);
+    void drawPoint(Point *p, QColor color = QColor("black"));
+    void colourCluster(Cluster *c);
 
 signals:
 

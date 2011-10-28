@@ -37,3 +37,13 @@ bool Point::operator==(const Point &p) const
     if (x != p.x || y != p.y) return false;
     return true;
 }
+
+double Point::euclideanDistance(Point *pt)
+{
+    double dist = 0.0;
+    double x_dist = pow((pt->getX() - x), 2);
+    double y_dist = pow((pt->getY() - y), 2);
+
+    dist = sqrt(x_dist + y_dist);
+    return dist;
+}
