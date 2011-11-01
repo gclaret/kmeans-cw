@@ -10,21 +10,24 @@ public:
     Cluster(QColor c);
 
     Point *getCentroid();
-    int getNumberOfPoints();
+    int getNumberOfPoints() const;
     void computeConvexHull();
-    vector<Point *> getPoints();
+    vector<Point *> *getPoints() const;
     void addPoint(Point *p);
     void removePoint(Point *p);
-    QColor getColour();
+    QColor getColour() const;
     void clearPoints();
 
+    friend ostream &operator<<(ostream &output, const Cluster &c);
+
+    // add << operator that spits out all the points.  Need this for debugging.
 private:
     void randomInit();
 
     Point *centroid;
     int number_of_points;
     vector<Point *> convex_hull;
-    vector<Point *> points;
+    vector<Point *> *points;
     QColor colour;
 };
 

@@ -45,3 +45,13 @@ void PointList::removePoint(Point *p)
         }
     }
 }
+
+vector<Point *>::iterator PointList::begin()
+{
+    return pl->begin();
+}
+
+vector<Point *>::iterator PointList::end()
+{
+    return pl->end();
+}

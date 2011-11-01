@@ -14,6 +14,8 @@ public:
 
     static PointList *getInstance();
     void addPoint(Point *p);
+    vector<Point *>::iterator begin();
+    vector<Point *>::iterator end();
 
 
 private:
