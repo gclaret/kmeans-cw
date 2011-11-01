@@ -2,6 +2,7 @@
 #define KMEANSCLUSTERING_H
 
 #include <utility>
+#include <iostream>
 #include "PointList.h"
 #include "Cluster.h"
 
@@ -9,14 +10,15 @@ class KMeansClustering
 {
 public:
     KMeansClustering(int _k, PointList *p);
-    void init();
+    void NaiveKMeans();
+    vector<Cluster *> getClusters() const;
 
 
 
     int getK();
 
 private:
-    void NaiveKMeans();
+    void init();
 
     int k;
     PointList *point_list;

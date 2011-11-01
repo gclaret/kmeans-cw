@@ -12,12 +12,12 @@ Point::Point(double x, double y)
     this->y = y;
 }
 
-double Point::getX()
+double Point::getX() const
 {
     return x;
 }
 
-double Point::getY()
+double Point::getY() const
 {
     return y;
 }
@@ -36,6 +36,12 @@ bool Point::operator==(const Point &p) const
 {
     if (x != p.x || y != p.y) return false;
     return true;
+}
+
+ostream &operator<<(ostream &output, const Point &p)
+{
+        output << "(" << p.getX() << ", " << p.getY() << ")";
+        return output;
 }
 
 double Point::euclideanDistance(Point *pt)

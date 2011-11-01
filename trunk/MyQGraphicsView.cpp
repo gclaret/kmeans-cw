@@ -22,19 +22,24 @@ void MyQGraphicsView::mousePressEvent(QMouseEvent *e)
     pl->addPoint(p);
 }
 
-void MyQGraphicsView::drawPoint(Point *p, QColor color)
+void MyQGraphicsView::drawPoint(Point *p, QColor color, int size)
 {
     QPen pen;
     pen.setColor(color);
-    scene->addEllipse(p->getX(), p->getY(), 4, 4, pen, QBrush(Qt::SolidPattern));
+    std::cout << "Drawing point: " << *p << std::endl;
+    scene->addEllipse(p->getX(), p->getY(), size, size, pen, QBrush(Qt::SolidPattern));
     std::cout << "Adding point at " << p->getX() << ", " << p->getY() << std::endl;
 }
 
 void MyQGraphicsView::colourCluster(Cluster *c)
 {
+    std::cout << *c << endl;
+    std::cout << "It's time to colour a cluster.  This cluster is centered at " << *(c->getCentroid()) << " ok." << std::endl;
+    std::cout << "This cluster's size is " << c->getPoints()->size() << std::endl;
 
-    for (vector<Point *>::iterator it = c->getPoints().begin(); it != c->getPoints().end(); ++ it)
+    for (vector<Point *>::iterator it = c->getPoints()->begin(); it != c->getPoints()->end(); ++ it)
     {
-        drawPoint(*it, c->getColour());
+        std::cout << "This point we will colour is " << *(*it) << " and we are good. " << std::endl;
+        drawPoint(*it, c->getColour(), 10);
     }
 }

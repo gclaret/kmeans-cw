@@ -13,7 +13,7 @@ class MyQGraphicsView : public QGraphicsView
     Q_OBJECT
 public:
     explicit MyQGraphicsView(QWidget *parent = 0);
-    void drawPoint(Point *p, QColor color = QColor("black"));
+    void drawPoint(Point *p, QColor color = QColor("black"), int size = 4);
     void colourCluster(Cluster *c);
 
 signals:

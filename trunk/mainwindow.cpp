@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "KMeansClustering.h"
 #include <iostream>
 #include <QGridLayout>
 
@@ -25,6 +26,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::kmeansButtonPushHandler()
+{
+    KMeansClustering kmc(2, PointList::getInstance());
+    kmc.NaiveKMeans();
+    vector<Cluster *> c = kmc.getClusters();
+
+    for (vector<Cluster *>::iterator it = c.begin(); it != c.end(); ++ it)
+    {
+       my_view->colourCluster(*it);
+    }
 }
 
 void MainWindow::numberOfPointsHandler()

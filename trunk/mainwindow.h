@@ -22,6 +22,7 @@ public:
 
 public slots:
     void numberOfPointsHandler();
+    void kmeansButtonPushHandler();
 
 private:
     Ui::MainWindow *ui;
