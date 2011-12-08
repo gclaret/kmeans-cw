@@ -43,3 +43,8 @@ void MyQGraphicsView::colourCluster(Cluster *c)
         drawPoint(*it, c->getColour(), 10);
     }
 }
+
+QGraphicsScene *MyQGraphicsView::getScene()
+{
+    return scene;
+}

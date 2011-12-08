@@ -7,7 +7,7 @@
 class Cluster
 {
 public:
-    Cluster(QColor c);
+    Cluster(QColor c, int id);
 
     Point *getCentroid();
     int getNumberOfPoints() const;
@@ -17,6 +17,7 @@ public:
     void removePoint(Point *p);
     QColor getColour() const;
     void clearPoints();
+    int id;
 
     friend ostream &operator<<(ostream &output, const Cluster &c);
 

@@ -15,6 +15,7 @@ public:
     explicit MyQGraphicsView(QWidget *parent = 0);
     void drawPoint(Point *p, QColor color = QColor("black"), int size = 4);
     void colourCluster(Cluster *c);
+    QGraphicsScene *getScene();
 
 signals:
 

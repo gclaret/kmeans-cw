@@ -17,42 +17,60 @@ void KMeansClustering::init()
     // do nothing.
     for (int i = 0; i < k; i++)
     {
-        Cluster *c = new Cluster(colours[i]);
+        Cluster *c = new Cluster(colours[i], i);
         clusters.push_back(c);
     }
+}
+
+bool KMeansCluster::assignAllPointsToNearestCluster()
+{
+    bool convergance = true;
+
+    for (vector<Point *>::iterator it = point_list->begin(); it != point_list->end(); ++it)
+    {
+        Cluster *closest_cluster = clusters.at(0);
+        double min_dist, current_dist = 0.0;
+
+        // find the cluster with closest centroid, by euclidean distance
+        min_dist = (*it)->euclideanDistance(closest_cluster->getCentroid());
+        for (vector<Cluster *>::iterator c = clusters.begin(); c != clusters.end(); ++c)
+        {
+            //std::cout << "This cluster is " << current_dist << " from the point " << *(*it) << std::endl;
+            current_dist = (*it)->euclideanDistance((*c)->getCentroid());
+            if (current_dist < min_dist)
+            {
+                //std::cout << "New closest centroid." << std::endl;
+                min_dist = current_dist;
+                closest_cluster = (*c);
+            }
+            //std::cout << "Current closest cluster centered at " << *(closest_cluster->getCentroid()) << std::endl;
+        }
+
+        // assign point to closest_cluster and test for convergance.
+        closest_cluster->addPoint((*it));
+        std::cout << "Previous id = " << (*it)->getCluster() << " and the new id = " << closest_cluster->id << std::endl;
+        if (closest_cluster->id != (*it)->getCluster())
+        {
+            convergance = false;
+        }
+        (*it)->setCluster(closest_cluster->id);
+    }
+
+    return convergance;
 }
 
 // for this, perhaps we should implement some compgeom algorithm for fast allocation of points.
 // perhaps we should build the voronoi diagram?
 void KMeansClustering::NaiveKMeans()
 {
+    bool convergance = false;
     // randomly initialize (done in init())
-    // assign pts to nearest centroid
-    for (vector<Point *>::iterator it = point_list->begin(); it != point_list->end(); ++it)
+
+    while (!convergance)
     {
-        Cluster *closest_cluster = clusters.at(0);
-        double min_dist, current_dist = 0.0;
-        min_dist = (*it)->euclideanDistance(closest_cluster->getCentroid());
-        for (vector<Cluster *>::iterator c = clusters.begin(); c != clusters.end(); ++c)
-        {
-            std::cout << "This cluster is " << current_dist << " from the point " << *(*it) << std::endl;
-            current_dist = (*it)->euclideanDistance((*c)->getCentroid());
-            if (current_dist < min_dist)
-            {
-                std::cout << "New closest centroid." << std::endl;
-                min_dist = current_dist;
-                closest_cluster = (*c);
-            }
-            std::cout << "Current closest cluster centered at " << *(closest_cluster->getCentroid()) << std::endl;
-        }
-
-        // assign point to closest_cluster.
-        closest_cluster->addPoint((*it));
-        std::cout << "Adding: " << *(*it) << std::endl;
-        std::cout << "This cluster is now: " << *closest_cluster << std::endl;
+        convergance = assignAllPointsToNearestCluster();
+        // update centroids based on clusters [TODO]
     }
-
-    // update centroids based on clusters [TODO]
 }
 
 vector<Cluster *> KMeansClustering::getClusters() const

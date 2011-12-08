@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Add points</string>
     </property>
    </widget>
    <widget class="QSlider" name="horizontalSlider">
@@ -61,7 +61,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Cluster</string>
     </property>
    </widget>
   </widget>

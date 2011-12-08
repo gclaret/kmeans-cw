@@ -4,12 +4,14 @@ Point::Point()
 {
     this->x = 0;
     this->y = 0;
+    this->cluster = -1;
 }
 
 Point::Point(double x, double y)
 {
     this->x = x;
     this->y = y;
+    this->cluster = -1;
 }
 
 double Point::getX() const
@@ -21,6 +23,17 @@ double Point::getY() const
 {
     return y;
 }
+
+int Point::getCluster() const
+{
+    return cluster;
+}
+
+int Point::setCluster(int c)
+{
+    cluster = c;
+}
+
 
 void Point::setX(double x)
 {
