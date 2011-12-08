@@ -31,7 +31,7 @@ MainWindow::~MainWindow()
 void MainWindow::kmeansButtonPushHandler()
 {
     KMeansClustering kmc(2, PointList::getInstance());
-    kmc.NaiveKMeans();
+    kmc.NaiveKMeans(my_view);
     vector<Cluster *> c = kmc.getClusters();
 
     for (vector<Cluster *>::iterator it = c.begin(); it != c.end(); ++ it)
@@ -49,16 +49,14 @@ void MainWindow::numberOfPointsHandler()
     PointList *pl = PointList::getInstance();
     int x_coord, y_coord;
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < num_pts; i++)
     {
-        x_coord = rand() % 350;
-        y_coord = rand() % 350;
+        x_coord = rand() % (int)my_view->getScene()->width();
+        y_coord = rand() % (int)my_view->getScene()->height();
 
         Point *p = new Point(x_coord, y_coord);
         pl->addPoint(p);
         my_view->drawPoint(p, QColor("cyan"));
-
-
     }
 
 }

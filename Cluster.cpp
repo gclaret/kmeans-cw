@@ -1,7 +1,8 @@
 #include "Cluster.h"
 
-Cluster::Cluster(QColor c)
+Cluster::Cluster(QColor c, int id)
 {
+    this->id = id;
     this->colour = c;
     number_of_points = 0;
     points = new vector<Point *>();
