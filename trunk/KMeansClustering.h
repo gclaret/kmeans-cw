@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <iostream>
+#include <QTimer>
 #include "PointList.h"
 #include "Cluster.h"
 #include "MyQGraphicsView.h"
@@ -11,7 +12,8 @@ class KMeansClustering
 {
 public:
     KMeansClustering(int _k, PointList *p);
-    void NaiveKMeans(MyQGraphicsView *my_view);
+    void naiveKMeans(MyQGraphicsView *my_view);
+    bool naiveStep(MyQGraphicsView *my_view);
     vector<Cluster *> getClusters() const;
 
     int getK();

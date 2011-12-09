@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 #include <QMouseEvent>
+#include <QTimer>
 #include "PointList.h"
 #include "Cluster.h"
 
@@ -16,14 +17,18 @@ public:
     void drawPoint(Point *p, QColor color = QColor("black"), int size = 4);
     void colourCluster(Cluster *c);
     QGraphicsScene *getScene();
+    void delayedColourClusters(std::vector<Cluster *> &clusters);
 
 signals:
 
 public slots:
     void mousePressEvent(QMouseEvent *e);
+    void colourClusters();
 
 private:
     QGraphicsScene *scene;
+    std::vector<Cluster *> cluster_state;
+
 };
 
 #endif // MYQGRAPHICSVIEW_H

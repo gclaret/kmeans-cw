@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     my_view = new MyQGraphicsView();
     ui->gridLayout->addWidget(my_view);
-    std::cout << "height = " << ui->gridLayout->geometry().height() << std::endl;
+    //std::cout << "height = " << ui->gridLayout->geometry().height() << std::endl;
 
     PointList *pl = PointList::getInstance();
     Point *p1, *p2;
@@ -21,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     p2 = new Point(350, 350);
     pl->addPoint(p2);
     my_view->drawPoint(p2);
+
+    clustering_begun = false;
 }
 
 MainWindow::~MainWindow()
@@ -30,13 +32,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::kmeansButtonPushHandler()
 {
-    KMeansClustering kmc(2, PointList::getInstance());
-    kmc.NaiveKMeans(my_view);
-    vector<Cluster *> c = kmc.getClusters();
-
-    for (vector<Cluster *>::iterator it = c.begin(); it != c.end(); ++ it)
+    bool converged = false;
+    if (!clustering_begun)
     {
-       my_view->colourCluster(*it);
+        kmc = new KMeansClustering(3, PointList::getInstance());
+        converged = kmc->naiveStep(my_view);
+        clustering_begun = true;
+    }
+    else
+    {
+
+        std::cout << "clustering begun is true" << std::endl;
+        converged = kmc->naiveStep(my_view);
     }
 }
 
@@ -44,7 +51,7 @@ void MainWindow::numberOfPointsHandler()
 {
     int num_pts = 0;
     num_pts = ui->horizontalSlider->value();
-    std::cout << "num_pts = " << num_pts << std::endl;
+   // std::cout << "num_pts = " << num_pts << std::endl;
 
     PointList *pl = PointList::getInstance();
     int x_coord, y_coord;
@@ -58,5 +65,7 @@ void MainWindow::numberOfPointsHandler()
         pl->addPoint(p);
         my_view->drawPoint(p, QColor("cyan"));
     }
+
+    clustering_begun = false;
 
 }

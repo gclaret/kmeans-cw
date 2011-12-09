@@ -7,6 +7,7 @@
 #include <QGraphicsLineItem>
 #include "PointList.h"
 #include "MyQGraphicsView.h"
+#include "KMeansClustering.h"
 
 namespace Ui {
     class MainWindow;
@@ -27,6 +28,9 @@ public slots:
 private:
     Ui::MainWindow *ui;
     MyQGraphicsView *my_view;
+
+    bool clustering_begun;
+    KMeansClustering *kmc;
 };
 
 #endif // MAINWINDOW_H

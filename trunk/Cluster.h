@@ -10,6 +10,7 @@ public:
     Cluster(QColor c, int id);
 
     Point *getCentroid();
+    void updateCentroid();
     int getNumberOfPoints() const;
     void computeConvexHull();
     vector<Point *> *getPoints() const;
@@ -26,7 +27,6 @@ private:
     void randomInit();
 
     Point *centroid;
-    int number_of_points;
     vector<Point *> convex_hull;
     vector<Point *> *points;
     QColor colour;

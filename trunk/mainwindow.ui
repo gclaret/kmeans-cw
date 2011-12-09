@@ -64,6 +64,19 @@
      <string>Cluster</string>
     </property>
    </widget>
+   <widget class="QLabel" name="lblNumPoints">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>30</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -142,6 +155,22 @@
     <hint type="destinationlabel">
      <x>854</x>
      <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>lblNumPoints</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>673</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>711</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>

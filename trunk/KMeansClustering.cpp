@@ -22,7 +22,7 @@ void KMeansClustering::init()
     }
 }
 
-bool KMeansCluster::assignAllPointsToNearestCluster()
+bool KMeansClustering::assignAllPointsToNearestCluster()
 {
     bool convergance = true;
 
@@ -48,7 +48,7 @@ bool KMeansCluster::assignAllPointsToNearestCluster()
 
         // assign point to closest_cluster and test for convergance.
         closest_cluster->addPoint((*it));
-        std::cout << "Previous id = " << (*it)->getCluster() << " and the new id = " << closest_cluster->id << std::endl;
+        //std::cout << "Previous id = " << (*it)->getCluster() << " and the new id = " << closest_cluster->id << std::endl;
         if (closest_cluster->id != (*it)->getCluster())
         {
             convergance = false;
@@ -59,18 +59,52 @@ bool KMeansCluster::assignAllPointsToNearestCluster()
     return convergance;
 }
 
+bool KMeansClustering::naiveStep(MyQGraphicsView *my_view)
+{
+    bool converged;
+    converged = assignAllPointsToNearestCluster();
+    std::cout << "Converged = " << converged <<std::endl;
+
+    for (vector<Cluster *>::iterator it = clusters.begin(); it != clusters.end(); ++ it)
+    {
+        std::cout << "colouring cluster " << (*it)->id << std::endl;
+        my_view->colourCluster(*it);
+    }
+
+    for (std::vector<Cluster *>::iterator it = clusters.begin(); it != clusters.end(); ++it)
+    {
+        (*it)->updateCentroid();
+    }
+}
+
 // for this, perhaps we should implement some compgeom algorithm for fast allocation of points.
 // perhaps we should build the voronoi diagram?
-void KMeansClustering::NaiveKMeans()
+void KMeansClustering::naiveKMeans(MyQGraphicsView *my_view)
 {
     bool convergance = false;
     // randomly initialize (done in init())
+    int round = 0;
 
     while (!convergance)
     {
         convergance = assignAllPointsToNearestCluster();
+        my_view->delayedColourClusters(clusters);
+
+        std::cout << "Round " << round << " summary" << std::endl;
+        for (std::vector<Cluster *>::iterator it = clusters.begin(); it != clusters.end(); ++it)
+        {
+            std::cout << "Cluster " <<  (*it)->id << " has " << (*it)->getNumberOfPoints() << " points." << std::endl;
+        }
+
         // update centroids based on clusters [TODO]
+        std::cout << "Should print AFTER colouring." << std::endl;
+        for (std::vector<Cluster *>::iterator it = clusters.begin(); it != clusters.end(); ++it)
+        {
+            (*it)->updateCentroid();
+        }
+        round++;
     }
+    std::cout << "Converged." << std::endl;
 }
 
 vector<Cluster *> KMeansClustering::getClusters() const
