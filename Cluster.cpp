@@ -4,7 +4,6 @@ Cluster::Cluster(QColor c, int id)
 {
     this->id = id;
     this->colour = c;
-    number_of_points = 0;
     points = new vector<Point *>();
     randomInit();
 }
@@ -22,9 +21,37 @@ Point *Cluster::getCentroid()
     return centroid;
 }
 
+void Cluster::updateCentroid()
+{
+    std::cout << "Updating centroid" << std::endl;
+    int count = 0;
+    double x_sum = 0.0;
+    double y_sum = 0.0;
+    for (std::vector<Point *>::iterator it = points->begin(); it != points->end(); ++it)
+    {
+        x_sum += (*it)->getX();
+        y_sum += (*it)->getY();
+        count++;
+    }
+
+    // need to account for if we have no points better than this.  delete the cluster maybe or reallocate it randomly [TODO]
+    if (count == 0)
+    {
+        centroid->setX(0);
+        centroid->setY(0);
+    }
+    else
+    {
+        centroid->setX(x_sum/count);
+        centroid->setY(y_sum/count);
+    }
+
+    points->clear();
+}
+
 int Cluster::getNumberOfPoints() const
 {
-    return number_of_points;
+    return points->size();
 }
 
 void Cluster::clearPoints()
@@ -51,9 +78,9 @@ QColor Cluster::getColour() const
 
 void Cluster::addPoint(Point *p)
 {
-    std::cout << "Adding: " << *p << std::endl;
+    //std::cout << "Adding: " << *p << std::endl;
     points->push_back(p);
-    std::cout << *this << std::endl;
+    //std::cout << *this << std::endl;
 }
 
 void Cluster::removePoint(Point *p)
