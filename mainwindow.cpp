@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     my_view = new MyQGraphicsView();
     ui->gridLayout->addWidget(my_view);
+    ui->converged_label->hide();
     //std::cout << "height = " << ui->gridLayout->geometry().height() << std::endl;
 
     PointList *pl = PointList::getInstance();
@@ -33,9 +34,11 @@ MainWindow::~MainWindow()
 void MainWindow::kmeansButtonPushHandler()
 {
     bool converged = false;
+    int k = ui->k_value_input->text().toInt();
+
     if (!clustering_begun)
     {
-        kmc = new KMeansClustering(3, PointList::getInstance());
+        kmc = new KMeansClustering(k, PointList::getInstance());
         converged = kmc->naiveStep(my_view);
         clustering_begun = true;
     }
@@ -44,6 +47,14 @@ void MainWindow::kmeansButtonPushHandler()
 
         std::cout << "clustering begun is true" << std::endl;
         converged = kmc->naiveStep(my_view);
+        if (converged)
+        {
+            ui->converged_label->show();
+        }
+        else
+        {
+            ui->converged_label->hide();
+        }
     }
 }
 

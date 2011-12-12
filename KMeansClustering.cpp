@@ -35,15 +35,12 @@ bool KMeansClustering::assignAllPointsToNearestCluster()
         min_dist = (*it)->euclideanDistance(closest_cluster->getCentroid());
         for (vector<Cluster *>::iterator c = clusters.begin(); c != clusters.end(); ++c)
         {
-            //std::cout << "This cluster is " << current_dist << " from the point " << *(*it) << std::endl;
             current_dist = (*it)->euclideanDistance((*c)->getCentroid());
             if (current_dist < min_dist)
             {
-                //std::cout << "New closest centroid." << std::endl;
                 min_dist = current_dist;
                 closest_cluster = (*c);
             }
-            //std::cout << "Current closest cluster centered at " << *(closest_cluster->getCentroid()) << std::endl;
         }
 
         // assign point to closest_cluster and test for convergance.
@@ -75,6 +72,7 @@ bool KMeansClustering::naiveStep(MyQGraphicsView *my_view)
     {
         (*it)->updateCentroid();
     }
+    return converged;
 }
 
 // for this, perhaps we should implement some compgeom algorithm for fast allocation of points.
