@@ -68,3 +68,29 @@ QGraphicsScene *MyQGraphicsView::getScene()
 {
     return scene;
 }
+
+void MyQGraphicsView::delaunayTriangulate(std::vector<Point *> pts)
+{
+    Delaunay dt;
+    for (std::vector<Point *>::iterator it; it != pts->end(); ++it)
+    {
+        dt.insert(*(*it));
+    }
+}
+
+/*
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Delaunay_triangulation_2.h>
+typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
+typedef Kernel::Point_2 Point;
+typedef CGAL::Delaunay_triangulation_2<Kernel> Delaunay;
+typedef Delaunay::Vertex_handle Vertex_handle;
+int main()
+{
+Delaunay dt;
+dt.insert( std::istream_iterator<Point>(std::cin),
+std::istream_iterator<Point>() );
+Vertex_handle v = dt.nearest_vertex(Point(0.0,0.0));
+std::cout << “Nearest vertex to origin: “ << v->point() << std::endl;
+return 0;
+}*/

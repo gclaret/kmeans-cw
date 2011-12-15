@@ -27,14 +27,14 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+QMAKE_CXXFLAGS += -std=c++0x
 
+unix:!symbian|win32: LIBS += -L$$PWD/../Libraries/CGAL-3.9/bin/lib/Debug/ -lCGAL-vc100-mt-gd -CGAL_Core-vc100-mt-gd -CGAL_ImageIO-cv100-mt-gd
 
+INCLUDEPATH += $$PWD/../Libraries/CGAL-3.9/include
+DEPENDPATH += $$PWD/../Libraries/CGAL-3.9/include
 
+INCLUDEPATH += C:/Projects/Libraries/boost_1_47
+INCLUDEPATH += C:/Projects/Libraries/CGAL-3.9/bin/include
 
-
-
-
-
-
-
-
+INCLUDEPATH += C:\Projects\Libraries\CGAL-3.9\include\CGAL\auto_link
