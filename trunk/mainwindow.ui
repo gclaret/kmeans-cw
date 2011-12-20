@@ -51,7 +51,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
    </widget>
-   <widget class="QPushButton" name="kmeans_button">
+   <widget class="QPushButton" name="kmeans_pushbutton">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -93,7 +93,7 @@
    <widget class="QLineEdit" name="k_value_input">
     <property name="geometry">
      <rect>
-      <x>810</x>
+      <x>830</x>
       <y>60</y>
       <width>21</width>
       <height>20</height>
@@ -106,7 +106,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>840</x>
+      <x>860</x>
       <y>60</y>
       <width>51</width>
       <height>16</height>
@@ -115,6 +115,84 @@
     <property name="text">
      <string>&quot;K&quot; value</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="import_button">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>560</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Import</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="save_points_button">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>560</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save Points</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="algorithm_group">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>160</y>
+      <width>120</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Algorithm</string>
+    </property>
+    <widget class="QRadioButton" name="kmeans_button">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>K-Means</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="kmeans_plusplus_button">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>K-Means++</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="kmeans_sharp_button">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>82</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>K-Means#</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -173,7 +251,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>909</x>
-     <y>64</y>
+     <y>123</y>
     </hint>
     <hint type="destinationlabel">
      <x>852</x>
@@ -182,14 +260,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>kmeans_button</sender>
+   <sender>kmeans_pushbutton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>kmeansButtonPushHandler()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>901</x>
-     <y>110</y>
+     <y>163</y>
     </hint>
     <hint type="destinationlabel">
      <x>854</x>
@@ -205,11 +283,43 @@
    <hints>
     <hint type="sourcelabel">
      <x>673</x>
-     <y>54</y>
+     <y>123</y>
     </hint>
     <hint type="destinationlabel">
      <x>711</x>
-     <y>72</y>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>import_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>import()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>782</x>
+     <y>605</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>728</x>
+     <y>558</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>save_points_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>savePoints()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>886</x>
+     <y>606</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>843</x>
+     <y>523</y>
     </hint>
    </hints>
   </connection>
@@ -217,5 +327,10 @@
  <slots>
   <slot>numberOfPointsHandler()</slot>
   <slot>kmeansButtonPushHandler()</slot>
+  <slot>import()</slot>
+  <slot>savePoints()</slot>
  </slots>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>
