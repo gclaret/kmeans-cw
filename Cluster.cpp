@@ -8,6 +8,20 @@ Cluster::Cluster(QColor c, int id)
     randomInit();
 }
 
+Cluster::Cluster(QColor c, int id, double _x, double _y)
+{
+    this->id = id;
+    this->colour = c;
+    points = new vector<Point *>();
+    centroid = new Point(_x, _y);
+}
+
+Cluster::~Cluster()
+{
+    delete centroid;
+    points->clear();
+}
+
 void Cluster::randomInit()
 {
     int x_coord = rand() % 350;
@@ -23,7 +37,6 @@ Point *Cluster::getCentroid()
 
 void Cluster::updateCentroid()
 {
-    std::cout << "Updating centroid" << std::endl;
     int count = 0;
     double x_sum = 0.0;
     double y_sum = 0.0;
@@ -65,12 +78,6 @@ vector<Point *> *Cluster::getPoints() const
     return points;
 }
 
-
-void Cluster::computeConvexHull()
-{
-
-}
-
 QColor Cluster::getColour() const
 {
     return colour;
@@ -78,9 +85,11 @@ QColor Cluster::getColour() const
 
 void Cluster::addPoint(Point *p)
 {
-    //std::cout << "Adding: " << *p << std::endl;
     points->push_back(p);
-    //std::cout << *this << std::endl;
+    /*for (vector<Point *>::iterator it = points->begin(); it != points->end(); ++it)
+    {
+        cout << (*it)->getX() << ", " << (*it)->getY() << endl;
+    }*/
 }
 
 void Cluster::removePoint(Point *p)

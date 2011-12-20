@@ -8,6 +8,13 @@
 #include "PointList.h"
 #include "MyQGraphicsView.h"
 #include "KMeansClustering.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+#define KMEANS 0
+#define KMEANS_PLUSPLUS 1
+#define KMEANS_SHARP 2
 
 namespace Ui {
     class MainWindow;
@@ -24,8 +31,12 @@ public:
 public slots:
     void numberOfPointsHandler();
     void kmeansButtonPushHandler();
+    void import();
+    void savePoints();
 
 private:
+    void reset();
+
     Ui::MainWindow *ui;
     MyQGraphicsView *my_view;
 

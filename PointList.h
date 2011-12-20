@@ -16,6 +16,9 @@ public:
     void addPoint(Point *p);
     vector<Point *>::iterator begin();
     vector<Point *>::iterator end();
+    int size();
+    Point *operator[](unsigned int i) const;
+    void clear();
 
 
 private:
